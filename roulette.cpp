@@ -5,7 +5,7 @@
 
 using namespace std;
 
-enum BetType { NUMBER, COLOR, EVEN_ODD }; // typ zak≥adu
+enum BetType { NUMBER, COLOR, EVEN_ODD }; // typ zak¬≥adu
 
 // losowanie liczby (0-36)
 int spinWheel() {
@@ -19,29 +19,29 @@ string getColor(int number) {
     else return (number % 2 == 0) ? "Czerwony" : "Czarny";
 }
 
-// funkcja zmieniajπca litery w stringu na ma≥e
+// funkcja zmieniajƒÖca litery w stringu na ma≈Çe
 string lowerCase(string text) {
 	for (auto& x : text) x = tolower(x);
 	return text;
 }
 
-// sprawdza czy zak≥ad na liczbÍ wygra≥
+// sprawdza czy zak≈Çad na liczbƒô wygra≈Ç
 bool checkNumberBet(int chosen, int result) {
     return chosen == result;
 }
 
-// sprawdza zak≥ad na kolor
+// sprawdza zak≈Çad na kolor
 bool checkColorBet(string chosen, string result) {
     return lowerCase(chosen) == result;
 }
 
-// sprawdza zak≥ad parzyste / nieparzyste
+// sprawdza zak≈Çad parzyste / nieparzyste
 bool checkEvenOdd(bool chosenEven, int result) {
     if (result == 0) return false;
     return (result % 2 == 0) == chosenEven;
 }
 
-// oblicza wyp≥atÍ
+// oblicza wyp≈Çatƒô
 int calculatePayout(BetType type, int bet) {
     if (type == NUMBER) return bet * 35;
     return bet * 2;
@@ -57,20 +57,20 @@ int main() {
     while (playAgain == 't') {
         cout << "\n=== RULETKA ===\nSaldo: $" << balance << endl;
         
-        // pobranie zak≥adu
+        // pobranie zak≈Çadu
         int betAmount;
-        cout << "Za jakπ kwotÍ chcesz zagraÊ: ";
+        cout << "Za jak¬π kwot√™ chcesz zagra√¶: ";
         cin >> betAmount;
 
         if (betAmount > balance || betAmount <= 0) {
-            cout << "Nielegalny zak≥ad!\n" << endl;
+            cout << "Nielegalny zak¬≥ad!\n" << endl;
             continue;
         }
         
         balance -= betAmount;
 
-        // Wybranie rodzaju zak≥adu
-        cout << "\nTyp zak≥adu:\n1 - Liczba\n2 - Kolor\n3 - Parzyste/Nieparzyste\n> ";
+        // wybranie rodzaju zak≈Çadu
+        cout << "\nTyp zak¬≥adu:\n1 - Liczba\n2 - Kolor\n3 - Parzyste/Nieparzyste\n> ";
         int betType;
         cin >> betType;
 
@@ -80,10 +80,10 @@ int main() {
         string chosenColor;
         bool chosenEven = false;
 
-		// pobranie danych dotyczπcych zak≥adu
+		// pobranie danych dotyczƒÖcych zak≈Çadu
         switch (chosenBet) {
             case NUMBER:
-                cout << "Wybierz liczbÍ od 0 do 36: ";
+                cout << "Wybierz liczb√™ od 0 do 36: ";
                 cin >> chosenNumber;
                 cout << endl;
                 if (chosenNumber < 0 || chosenNumber > 36) {
@@ -106,7 +106,7 @@ int main() {
                 cin >> eoChoice;
                 cout << endl;
                 if (eoChoice != 'p' && eoChoice != 'n') {
-                    cout << "Niepoprawna wartoúÊ!" << endl;
+                    cout << "Niepoprawna warto≈ì√¶!" << endl;
                     continue;
                 }
                 chosenEven = (eoChoice == 'p');
@@ -138,18 +138,18 @@ int main() {
         if (win) {
         	int winAmount = calculatePayout(chosenBet, betAmount);
             balance += winAmount;
-            cout << "Wygra≥eú " << winAmount << "! Posiadasz teraz $" << balance << endl;
+            cout << "Wygra¬≥e≈ì " << winAmount << "! Posiadasz teraz $" << balance << endl;
         } else cout << "Przegrana. Posiadasz teraz $" << balance << endl;
         
         if (balance <= 0) {
-        	cout << "Koniec úrodkÛw.\n";
+        	cout << "Koniec ≈ìrodk√≥w.\n";
         	break;
 		}
 
-        cout << "Chcesz zagraÊ jeszcze raz? (t/n): ";
+        cout << "Chcesz zagra√¶ jeszcze raz? (t/n): ";
         cin >> playAgain;
     }
 
-    cout << "DziÍkujemy za grÍ!" << endl;
+    cout << "Dzi√™kujemy za gr√™!" << endl;
     return 0;
 }
