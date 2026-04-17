@@ -25,7 +25,7 @@ vector<Card> createDeck(int numDecks) {
 	for (int d = 0; d < numDecks; d++) {
 	    for (int i = 0; i < 13; i++) {
 	        for (int j = 0; j < 4; j++) {
-	            deck.push_back({ranks[i], "X", values[i]}); // niedokoñczone - X zamiast faktycznych kolorów
+	            deck.push_back({ranks[i], "X", values[i]}); // niedokoÃ±czone - X zamiast faktycznych kolorÃ³w
 	        }
 	    }
 	}
@@ -34,18 +34,18 @@ vector<Card> createDeck(int numDecks) {
 }
 
 /*
-generator losowoœci (Mersenne Twister)
-robiony raz i trzymany statycznie, ¿eby nie resetowa³ siê co wywo³anie
+generator losowoÅ›ci (Mersenne Twister)
+robiony raz i trzymany statycznie, Å¼eby nie resetowaÅ‚ siÄ™ co wywoÅ‚anie
 */
 mt19937& rng() {
     static mt19937 g([]{
         random_device rd;
         
-        // jeœli system daje sensown¹ entropiê to jej u¿ywamy
+        // jeÅ›li system daje sensownÄ… entropiÄ™ to jej uÅ¼ywamy
         if (rd.entropy() > 0)
             return mt19937(rd());
             
-		// czas systemowy w przypadku "udawania losowoœci"
+		// czas systemowy w przypadku "udawania losowoÅ›ci"
         return mt19937(
             chrono::steady_clock::now().time_since_epoch().count()
         );
@@ -58,18 +58,18 @@ void shuffleDeck(vector<Card>& deck) {
     shuffle(deck.begin(), deck.end(), rng());
 }
 
-// liczenie wyniku rêki
+// liczenie wyniku rÄ™ki
 int calculateScore(vector<Card>& hand) {
     int sum = 0;
     int aces = 0;
 
-	// sprawdzenie liczby asów
+	// sprawdzenie liczby asÃ³w
     for (auto& card : hand) {
         sum += card.value;
         if (card.rank == "A") aces++;
     }
 
-	// przekroczenie 21, zmiana wartoœci asa na 1
+	// przekroczenie 21, zmiana wartoÅ›ci asa na 1
     while (sum > 21 && aces > 0) {
         sum -= 10;
         aces--;
@@ -90,7 +90,7 @@ Card drawCard(vector<Card>& deck) {
 	return card;
 }
 
-// mo¿liwe ruchy gracza (do dodania reszta mwyborów - split, double etc)
+// moÅ¼liwe ruchy gracza (do dodania reszta wyborÃ³w - split, double etc)
 enum Move { HIT, STAND };
 
 // ruch gracza
@@ -113,7 +113,7 @@ Move dealerMove() {
 	return HIT;
 }
 
-// wyœwietlanie rêki
+// wyÅ›wietlanie rÄ™ki
 void showCards(vector<Card>& hand) {
 	for (auto& card : hand) {
 		cout << card.rank << " ";
@@ -129,7 +129,7 @@ void currentState(vector<Card>& playerHand, vector<Card>& dealerHand) {
 	showCards(dealerHand);
 }
 
-// g³ówna logika (w pó¿niejszym etapie do rozbicia)
+// gÅ‚Ã³wna logika (w pÃ³Åºniejszym etapie do rozbicia)
 int game() {
 	
 	vector<Card> deck = createDeck(6);
@@ -170,7 +170,7 @@ int game() {
 				currentState(playerHand, dealerHand);
 			}
 			
-			// sprawdzenie wyników
+			// sprawdzenie wynikÃ³w
 			if (calculateScore(dealerHand) > 21 || calculateScore(dealerHand) < calculateScore(playerHand) && !bust) cout << "Wygrywa gracz!\n";
 			else if (calculateScore(dealerHand) == calculateScore(playerHand)) cout << "Remis!\n";
 			else cout << "Wygrywa krupier!\n";
